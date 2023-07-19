@@ -1,25 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css'
+import {useDispatch, useSelector} from "react-redux";
+import {Box, Button, CircularProgress} from "@mui/material";
+import {loginThunk} from "./app/slices/AuthSlice";
+import {HTTP_STATUS} from "./contants/https.const";
+import {useLayoutEffect} from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const authState = useSelector(state => state.authentication);
+    const dispatch = useDispatch();
+    const handleLogin = () => {
+        if (authState?.status !== HTTP_STATUS.DEFAULT) {
+            return;
+        }
+        dispatch(loginThunk({
+            email: 'dangkhanh.dev@gmail.com', password: '13122002'
+        }))
+    }
+    useLayoutEffect(() => {
+        console.log("auth data :::: ", authState.authData)
+    }, [authState?.authData])
+    return (
+        <Box>
+            <Button variant={'contained'} onClick={handleLogin}>
+                {authState?.status === HTTP_STATUS.PENDING ?
+                    <CircularProgress size={24} color={'primary'}/> :
+                    "Login"
+                }
+            </Button>
+        </Box>
+    )
 }
 
 export default App;
