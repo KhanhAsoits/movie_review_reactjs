@@ -113,14 +113,11 @@ export const LoginLayout = styled('div')`
         .layoutRegister-right {
             padding: 0px 25px;
         }
-
-
     }
-    
+
     .layoutRegister {
         top: 10%;
         padding: 25px;
     }
-
   }
 `
