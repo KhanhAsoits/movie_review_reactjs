@@ -142,18 +142,18 @@ export const MovieItem = styled('div')`
     }
 
     .MovieItem-listmv-info {
-        font-size: 14px;
-        color: #fff;
-        line-height: 20px;
-        padding: 2px 0;
-        color: #EBECE7;
-        font-weight: 400;
+      font-size: 14px;
+      color: #fff;
+      line-height: 20px;
+      padding: 2px 0;
+      color: #ebece7;
+      font-weight: 400;
     }
 
     .MovieItem-listmv-name {
-        font-size: 18px;
-        line-height: 22px;
-        color: #fff;
+      font-size: 18px;
+      line-height: 22px;
+      color: #fff;
     }
   }
 `
