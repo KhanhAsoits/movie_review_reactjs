@@ -34,7 +34,7 @@ export const MenuListItem = styled('li')`
     font-size: 18px;
     font-weight: 400;
     line-height: 20px;
-    color: #4475F2;
+    color: #4475f2;
   }
 `
 
@@ -60,7 +60,6 @@ export const InputSearch = styled('div')`
     background-color: transparent;
 
     &:focus-visible {
-        
     }
   }
 `
