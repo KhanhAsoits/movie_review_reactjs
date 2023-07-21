@@ -42,11 +42,11 @@ function MVHeader() {
         <Grid item my="auto" className="header-right">
           <InputSearch>
             <button>
-                <img src={IconSearch}></img>
+              <img src={IconSearch}></img>
             </button>
-            <input placeholder='Search...' className='search-input'></input>
+            <input placeholder="Search..." className="search-input"></input>
           </InputSearch>
-          <Button className='login'>Đăng nhập</Button>
+          <Button className="login">Đăng nhập</Button>
         </Grid>
       </Grid>
     </HeaderMV>

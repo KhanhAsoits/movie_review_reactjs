@@ -325,7 +325,6 @@ function FooterMV() {
           <Link color="#AAA" fontSize="14px" textAlign="right" >Bản quyền thuộc về Duy Bán Xe Máy</Link>
           </Grid>
         </Grid>
-       
       </Grid>
     </FooterStyle>
   )
