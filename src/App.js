@@ -1,12 +1,10 @@
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css'
-import LayoutMV from './render/App';
-import Home from './pages/trang-chu';
+import {AppRoute} from "./routes/AppRoute";
 
 function App() {
-    
     return (
-        <Home></Home>
+        <AppRoute/>
     )
 }
 
