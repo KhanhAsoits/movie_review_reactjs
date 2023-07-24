@@ -23,7 +23,19 @@ export const LoginLayout = styled('div')`
         outline: none;
         padding: 25px;
         display: flex;
-
+        .layoutItem-goBack {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            top: -2%;
+            right: -1%;
+            background-color: #e4e4e4;
+            border-radius: 50%;
+            padding: 0;
+            border: 0;
+            font-weight: 600;
+            cursor: pointer;s
+        }
         .layoutItem-left {
             width: 55%;
             padding:15px;
@@ -80,15 +92,16 @@ export const LoginLayout = styled('div')`
             }
 
             .btn-Submit {
-                padding: 10px;
+                padding: 8px;
                 border-radius: 30px;
                 width: 100%;
+                margin: 8px;
             }
 
             .layoutLogin-memorize{
                 display: flex;
                 justify-content: space-between;
-                padding-bottom: 30px;
+                padding-bottom: 20px;
 
                 .memorize-password {
                     margin: auto 0;

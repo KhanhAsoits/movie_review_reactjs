@@ -43,8 +43,8 @@ function Home() {
                                     <span>9,5</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        width="20"
-                                        height="20"
+                                        width="17"
+                                        height="17"
                                         viewBox="0 0 20 20"
                                         fill="none"
                                     >
@@ -64,7 +64,6 @@ function Home() {
                                 </Grid>
                                 <Grid
                                     item
-                                    display="flex"
                                     alignItems="center"
                                     className="home-mvInfor"
                                 >
@@ -197,6 +196,7 @@ function Home() {
                             </Grid>
                         </Grid>
                         <Grid container>
+                            <Link className='MovieItem-link'>
                             <Grid item className="MovieItem-listmv" m={1}>
                                 <div className="MovieItem-listmv-image ">
                                     <img src={Movie_1}/>
@@ -215,6 +215,8 @@ function Home() {
                                     <span>110 phút</span>
                                 </div>
                             </Grid>
+                            </Link>
+                            
                             <Grid item className="MovieItem-listmv" m={1}>
                                 <div className="MovieItem-listmv-image ">
                                     <img src={Movie_1}/>
@@ -356,7 +358,7 @@ function Home() {
                                     <span>Trạng Quỳnh</span>
                                 </div>
 
-                                <div className="MovieItem-listmv-rules MovieItem-listmv-info">
+                                <div className=" MovieItem-listmv-info">
                                     <span>Thể loại: </span>
                                     <span>Phiêu lưu, Trinh thám</span>
                                 </div>

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { HeaderMV, InputSearch, MenuList, MenuListItem } from './style'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
@@ -5,8 +6,37 @@ import Grid from '@mui/material/Grid'
 import { Button, Link } from '@mui/material'
 import Logo from '../../../assets/images/Logo.png'
 import IconSearch from '../../../assets/images/Iconsearch.png'
+import { useSelector } from 'react-redux'
+import Login from '../auth/login'
+import Register from '../auth/register'
 
 function MVHeader() {
+  const isLoggedIn = useSelector(
+    (state) => state.authentication._draft.isLoggedIn,
+  )
+
+  const user = useSelector(
+    (state) => state.authentication.authData,
+  )
+
+  const [isModalLoginOpen, setIsModalLoginOpen] = useState(false)
+  const [isModalRegisterOpen, setIsModalRegisterOpen] = useState(false)
+  console.log(user.username)
+  const handleLoginClick = () => {
+    setIsModalLoginOpen(true)
+  }
+
+  const closeModalLogin = () => {
+    setIsModalLoginOpen(false)
+  }
+
+  const handleRegisterClick = () => {
+    setIsModalRegisterOpen(true)
+  }
+
+  const closeModalRegister = () => {
+    setIsModalRegisterOpen(false)
+  }
   return (
     <HeaderMV>
       <Grid container height="100%" justifyContent={'space-between'}>
@@ -18,7 +48,7 @@ function MVHeader() {
               </Link>
             </MenuListItem>
             <MenuListItem>
-              <Link>
+              <Link className="active">
                 <span>Trang chủ</span>
               </Link>
             </MenuListItem>
@@ -46,9 +76,29 @@ function MVHeader() {
             </button>
             <input placeholder="Search..." className="search-input"></input>
           </InputSearch>
-          <Button className="login">Đăng nhập</Button>
+
+          {isLoggedIn ? (
+            <li className=" btn-auth user">
+              {user.username}
+              <button className='logout btn-auth'>Đăng Xuất</button>
+            </li>
+            
+          ) : (
+            <>
+            <Button className="login btn-auth" onClick={handleLoginClick}>
+                Đăng nhập
+              </Button>
+              <Button className="register btn-auth" onClick={handleRegisterClick}>
+                Đăng Kí
+              </Button>
+            </>
+          )}
+
+          
         </Grid>
       </Grid>
+      <Login isOpen={isModalLoginOpen} onClose={closeModalLogin} />
+      <Register isOpen={isModalRegisterOpen} onClose={closeModalRegister} />
     </HeaderMV>
   )
 }
