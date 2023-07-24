@@ -8,14 +8,14 @@ import Actor_1 from '../../assets/images/Rectangle125.png'
 import Movie_1 from '../../assets/images/Rectangle102.png'
 import {Grid, Link} from '@mui/material'
 import {useLayoutEffect} from "react";
-import {useDispatch} from "react-redux";
-import {getAllMovie} from "../../app/slices/MovieSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {loginThunk} from "../../app/slices/AuthSlice";
 
 function Home() {
     const dispatch = useDispatch()
     useLayoutEffect(() => {
-        dispatch(getAllMovie())
     }, [])
+
     return (
         <LayoutMV>
             <HomeStyle>

@@ -1,9 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
 import {LOGIN_PREFIX, REGISTER_PREFIX} from "../../contants/auth.const";
-import {HTTP_STATUS} from "../../contants/https.const";
 import {createThunkSlice} from "../../utils/createThunkSlice";
 import {login, register} from "../../services/AuthService";
-import {renderToStaticMarkup} from "react-dom/server";
 
 const initState = {
     authData: {}, _draft: {
@@ -33,6 +31,7 @@ const authSlice = createThunkSlice("authSlice", initState, (builder) => {
 
 
 export const loginThunk = createAsyncThunk(LOGIN_PREFIX, async (loginData, {rejectWithValue}) => {
+    // login data = {email,password}
     const resp = await login(loginData);
     if (resp != null) {
         return resp;
@@ -40,6 +39,7 @@ export const loginThunk = createAsyncThunk(LOGIN_PREFIX, async (loginData, {reje
     rejectWithValue('login failed')
 });
 export const registerThunk = createAsyncThunk(REGISTER_PREFIX, async (authData, {rejectWithValue}) => {
+    // authData = {email,password,username}
     const resp = await register(authData)
     if (resp != null) {
         return resp;
