@@ -6,15 +6,17 @@ import Poster_2 from '../../assets/images/Rectangle123.png'
 import Poster_3 from '../../assets/images/Rectangle124.png'
 import Actor_1 from '../../assets/images/Rectangle125.png'
 import Movie_1 from '../../assets/images/Rectangle102.png'
-import {Grid, Link} from '@mui/material'
+import {Box, CircularProgress, Grid, Link} from '@mui/material'
 import {useLayoutEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getAllMovie} from "../../app/slices/MovieSlice";
+import {getShowingMovie, getBestMovie, getSpecialMovie} from "../../app/slices/MovieSlice";
 
 function Home() {
     const dispatch = useDispatch()
     useLayoutEffect(() => {
-        // NOTE : get all movie here
+        dispatch(getBestMovie())
+        dispatch(getShowingMovie())
+        dispatch(getSpecialMovie())
     }, [])
     const {
         isFetchingBestMovie,
@@ -22,6 +24,7 @@ function Home() {
         isFetchingRecentlyMovie
     } = useSelector((state) => state.movie._draft);
 
+    const {bestMovie, recentlyMovie, specialMovie} = useSelector((state) => state.movie)
     return (
         <LayoutMV>
             <HomeStyle>
@@ -38,7 +41,6 @@ function Home() {
                             <div className="home-navTop">
                                 <span>Top 9 Phim Thịnh Hành</span>
                             </div>
-
                             <Grid container>
                                 <Grid
                                     item
@@ -202,81 +204,36 @@ function Home() {
                             </Grid>
                         </Grid>
                         <Grid container>
-                            <Link className='MovieItem-link'>
-                                <Grid item className="MovieItem-listmv" m={1}>
-                                    <div className="MovieItem-listmv-image ">
-                                        <img src={Movie_1}/>
-                                    </div>
-                                    <div className="MovieItem-listmv-name MovieItem-listmv-info">
-                                        <span>Trạng Quỳnh</span>
-                                    </div>
+                            {isFetchingBestMovie &&
+                                <Box minHeight={250} width={'100%'} display={'flex'} justifyContent={'center'}
+                                     alignItems={'center'}>
+                                    <CircularProgress size={30} color={'primary'}/>
+                                </Box>
+                            }
+                            {bestMovie.slice(0,6).map((movie,index)=>{
+                                return (
+                                    <Link key={index.toString()} className='MovieItem-link'>
+                                        <Grid item className="MovieItem-listmv" m={1}>
+                                            <div className="MovieItem-listmv-image">
+                                                <img src={movie?.thumbnail} style={{objectFit:'cover',backgroundColor:'white',borderRadius:6}} alt='movie back ground'/>
+                                            </div>
+                                            <div className="MovieItem-listmv-name MovieItem-listmv-info">
+                                                <span>{movie?.name}</span>
+                                            </div>
 
-                                    <div className="MovieItem-listmv-rules MovieItem-listmv-info">
-                                        <span>Thể loại: </span>
-                                        <span>Phiêu lưu, Trinh thám</span>
-                                    </div>
+                                            <div className="MovieItem-listmv-rules MovieItem-listmv-info">
+                                                <span>Thể loại: </span>
+                                                <span>{movie?.types.join(',')}</span>
+                                            </div>
 
-                                    <div className="MovieItem-listmv-time MovieItem-listmv-info">
-                                        <span>Thời lượng: </span>
-                                        <span>110 phút</span>
-                                    </div>
-                                </Grid>
-                            </Link>
-
-                            <Grid item className="MovieItem-listmv" m={1}>
-                                <div className="MovieItem-listmv-image ">
-                                    <img src={Movie_1}/>
-                                </div>
-                                <div className="MovieItem-listmv-name MovieItem-listmv-info">
-                                    <span>Trạng Quỳnh</span>
-                                </div>
-
-                                <div className="MovieItem-listmv-rules MovieItem-listmv-info">
-                                    <span>Thể loại: </span>
-                                    <span>Phiêu lưu, Trinh thám</span>
-                                </div>
-
-                                <div className="MovieItem-listmv-time MovieItem-listmv-info">
-                                    <span>Thời lượng: </span>
-                                    <span>110 phút</span>
-                                </div>
-                            </Grid>
-                            <Grid item className="MovieItem-listmv" m={1}>
-                                <div className="MovieItem-listmv-image ">
-                                    <img src={Movie_1}/>
-                                </div>
-                                <div className="MovieItem-listmv-name MovieItem-listmv-info">
-                                    <span>Trạng Quỳnh</span>
-                                </div>
-
-                                <div className="MovieItem-listmv-rules MovieItem-listmv-info">
-                                    <span>Thể loại: </span>
-                                    <span>Phiêu lưu, Trinh thám</span>
-                                </div>
-
-                                <div className="MovieItem-listmv-time MovieItem-listmv-info">
-                                    <span>Thời lượng: </span>
-                                    <span>110 phút</span>
-                                </div>
-                            </Grid>
-                            <Grid item className="MovieItem-listmv" m={1}>
-                                <div className="MovieItem-listmv-image ">
-                                    <img src={Movie_1}/>
-                                </div>
-                                <div className="MovieItem-listmv-name MovieItem-listmv-info">
-                                    <span>Trạng Quỳnh</span>
-                                </div>
-
-                                <div className="MovieItem-listmv-rules MovieItem-listmv-info">
-                                    <span>Thể loại: </span>
-                                    <span>Phiêu lưu, Trinh thám</span>
-                                </div>
-
-                                <div className="MovieItem-listmv-time MovieItem-listmv-info">
-                                    <span>Thời lượng: </span>
-                                    <span>110 phút</span>
-                                </div>
-                            </Grid>
+                                            <div className="MovieItem-listmv-time MovieItem-listmv-info">
+                                                <span>Thời lượng: </span>
+                                                <span>{movie?.duration.replace('h'," giờ").replace('m'," phút")}</span>
+                                            </div>
+                                        </Grid>
+                                    </Link>
+                                )
+                            })}
                         </Grid>
                     </MovieItem>
 
@@ -289,7 +246,7 @@ function Home() {
                                 className="MovieItem-listmv"
                                 m={1}
                             >
-                                <span className="MovieItem-listmv-title">Phim đang chiếu</span>
+                                <span className="MovieItem-listmv-title">Phim sắp chiếu</span>
                             </Grid>
                             <Grid
                                 item
@@ -302,78 +259,91 @@ function Home() {
                             </Grid>
                         </Grid>
                         <Grid container>
-                            <Grid item className="MovieItem-listmv" m={1}>
-                                <div className="MovieItem-listmv-image ">
-                                    <img src={Movie_1}/>
-                                </div>
-                                <div className="MovieItem-listmv-name MovieItem-listmv-info">
-                                    <span>Trạng Quỳnh</span>
-                                </div>
+                            {isFetchingRecentlyMovie &&
+                                <Box minHeight={250} width={'100%'} display={'flex'} justifyContent={'center'}
+                                     alignItems={'center'}>
+                                    <CircularProgress size={30} color={'primary'}/>
+                                </Box>
+                            }
+                            {recentlyMovie.slice(0,6).map((movie,index)=>{
+                                return (
+                                    <Link key={index.toString()} className='MovieItem-link'>
+                                    <Grid item className="MovieItem-listmv" m={1}>
+                                        <div className="MovieItem-listmv-image">
+                                            <img src={movie?.thumbnail} style={{objectFit:'cover',backgroundColor:'white',borderRadius:6}} alt='movie back ground'/>
+                                        </div>
+                                        <div className="MovieItem-listmv-name MovieItem-listmv-info">
+                                            <span>{movie?.name}</span>
+                                        </div>
 
-                                <div className="MovieItem-listmv-rules MovieItem-listmv-info">
-                                    <span>Thể loại: </span>
-                                    <span>Phiêu lưu, Trinh thám</span>
-                                </div>
+                                        <div className="MovieItem-listmv-rules MovieItem-listmv-info">
+                                            <span>Thể loại: </span>
+                                            <span>{movie?.types.join(',')}</span>
+                                        </div>
 
-                                <div className="MovieItem-listmv-time MovieItem-listmv-info">
-                                    <span>Thời lượng: </span>
-                                    <span>110 phút</span>
-                                </div>
+                                        <div className="MovieItem-listmv-time MovieItem-listmv-info">
+                                            <span>Thời lượng: </span>
+                                            <span>{movie?.duration.replace('h'," giờ").replace('m'," phút")}</span>
+                                        </div>
+                                    </Grid>
+                                </Link>
+                                )
+                            })}
+                        </Grid>
+                    </MovieItem>
+
+                    <MovieItem>
+                        <Grid container justifyContent="space-between">
+                            <Grid
+                                item
+                                display="flex"
+                                alignItems="center"
+                                className="MovieItem-listmv"
+                                m={1}
+                            >
+                                <span className="MovieItem-listmv-title">Suất chiếu đặc biệt</span>
                             </Grid>
-                            <Grid item className="MovieItem-listmv" m={1}>
-                                <div className="MovieItem-listmv-image ">
-                                    <img src={Movie_1}/>
-                                </div>
-                                <div className="MovieItem-listmv-name MovieItem-listmv-info">
-                                    <span>Trạng Quỳnh</span>
-                                </div>
-
-                                <div className="MovieItem-listmv-rules MovieItem-listmv-info">
-                                    <span>Thể loại: </span>
-                                    <span>Phiêu lưu, Trinh thám</span>
-                                </div>
-
-                                <div className="MovieItem-listmv-time MovieItem-listmv-info">
-                                    <span>Thời lượng: </span>
-                                    <span>110 phút</span>
-                                </div>
+                            <Grid
+                                item
+                                display="flex"
+                                alignItems="center"
+                                className="MovieItem-listmv"
+                                m={1}
+                            >
+                                <Link className="MovieItem-listmv-more">Xem thêm</Link>
                             </Grid>
-                            <Grid item className="MovieItem-listmv" m={1}>
-                                <div className="MovieItem-listmv-image ">
-                                    <img src={Movie_1}/>
-                                </div>
-                                <div className="MovieItem-listmv-name MovieItem-listmv-info">
-                                    <span>Trạng Quỳnh</span>
-                                </div>
+                        </Grid>
+                        <Grid container>
+                            {isFetchingSpecialMovie &&
+                                <Box minHeight={250} width={'100%'} display={'flex'} justifyContent={'center'}
+                                     alignItems={'center'}>
+                                    <CircularProgress size={30} color={'primary'}/>
+                                </Box>
+                            }
+                            {specialMovie.slice(0,6).map((movie,index)=>{
+                                return (
+                                    <Link key={index.toString()} className='MovieItem-link'>
+                                    <Grid item className="MovieItem-listmv" m={1}>
+                                        <div className="MovieItem-listmv-image">
+                                            <img src={movie?.thumbnail} style={{objectFit:'cover',backgroundColor:'white',borderRadius:6}} alt='movie back ground'/>
+                                        </div>
+                                        <div className="MovieItem-listmv-name MovieItem-listmv-info">
+                                            <span>{movie?.name}</span>
+                                        </div>
 
-                                <div className="MovieItem-listmv-rules MovieItem-listmv-info">
-                                    <span>Thể loại: </span>
-                                    <span>Phiêu lưu, Trinh thám</span>
-                                </div>
+                                        <div className="MovieItem-listmv-rules MovieItem-listmv-info">
+                                            <span>Thể loại: </span>
+                                            <span>{movie?.types.join(',')}</span>
+                                        </div>
 
-                                <div className="MovieItem-listmv-time MovieItem-listmv-info">
-                                    <span>Thời lượng: </span>
-                                    <span>110 phút</span>
-                                </div>
-                            </Grid>
-                            <Grid item className="MovieItem-listmv" m={1}>
-                                <div className="MovieItem-listmv-image ">
-                                    <img src={Movie_1}/>
-                                </div>
-                                <div className="MovieItem-listmv-name MovieItem-listmv-info">
-                                    <span>Trạng Quỳnh</span>
-                                </div>
-
-                                <div className=" MovieItem-listmv-info">
-                                    <span>Thể loại: </span>
-                                    <span>Phiêu lưu, Trinh thám</span>
-                                </div>
-
-                                <div className="MovieItem-listmv-time MovieItem-listmv-info">
-                                    <span>Thời lượng: </span>
-                                    <span>110 phút</span>
-                                </div>
-                            </Grid>
+                                        <div className="MovieItem-listmv-time MovieItem-listmv-info">
+                                            <span>Thời lượng: </span>
+                                            <span>{movie?.duration.replace('h'," giờ").replace('m'," phút")}</span>
+                                        </div>
+                                    </Grid>
+                                </Link>
+                                )
+                            })}
                         </Grid>
                     </MovieItem>
                 </HomeStyleItem>

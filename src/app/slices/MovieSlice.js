@@ -7,7 +7,7 @@ const initState = {
         isFetchingBestMovie: false, isFetchingRecentlyMovie: false, isFetchingSpecialMovie: false, alert: null
     }
 }
-const movieSlice = createThunkSlice('movieSlice', initState, builder => {
+const movieSlice = createThunkSlice('movieSlice', initState, {}, builder => {
     builder.addCase(getBestMovie.pending, (state) => {
         state._draft.isFetchingBestMovie = true;
     }).addCase(getBestMovie.fulfilled, (state, {payload}) => {
