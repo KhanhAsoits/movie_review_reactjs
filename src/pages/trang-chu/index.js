@@ -9,12 +9,18 @@ import Movie_1 from '../../assets/images/Rectangle102.png'
 import {Grid, Link} from '@mui/material'
 import {useLayoutEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loginThunk} from "../../app/slices/AuthSlice";
+import {getAllMovie} from "../../app/slices/MovieSlice";
 
 function Home() {
     const dispatch = useDispatch()
     useLayoutEffect(() => {
+        // NOTE : get all movie here
     }, [])
+    const {
+        isFetchingBestMovie,
+        isFetchingSpecialMovie,
+        isFetchingRecentlyMovie
+    } = useSelector((state) => state.movie._draft);
 
     return (
         <LayoutMV>
@@ -43,8 +49,8 @@ function Home() {
                                     <span>9,5</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        width="20"
-                                        height="20"
+                                        width="17"
+                                        height="17"
                                         viewBox="0 0 20 20"
                                         fill="none"
                                     >
@@ -64,7 +70,6 @@ function Home() {
                                 </Grid>
                                 <Grid
                                     item
-                                    display="flex"
                                     alignItems="center"
                                     className="home-mvInfor"
                                 >
@@ -197,24 +202,27 @@ function Home() {
                             </Grid>
                         </Grid>
                         <Grid container>
-                            <Grid item className="MovieItem-listmv" m={1}>
-                                <div className="MovieItem-listmv-image ">
-                                    <img src={Movie_1}/>
-                                </div>
-                                <div className="MovieItem-listmv-name MovieItem-listmv-info">
-                                    <span>Trạng Quỳnh</span>
-                                </div>
+                            <Link className='MovieItem-link'>
+                                <Grid item className="MovieItem-listmv" m={1}>
+                                    <div className="MovieItem-listmv-image ">
+                                        <img src={Movie_1}/>
+                                    </div>
+                                    <div className="MovieItem-listmv-name MovieItem-listmv-info">
+                                        <span>Trạng Quỳnh</span>
+                                    </div>
 
-                                <div className="MovieItem-listmv-rules MovieItem-listmv-info">
-                                    <span>Thể loại: </span>
-                                    <span>Phiêu lưu, Trinh thám</span>
-                                </div>
+                                    <div className="MovieItem-listmv-rules MovieItem-listmv-info">
+                                        <span>Thể loại: </span>
+                                        <span>Phiêu lưu, Trinh thám</span>
+                                    </div>
 
-                                <div className="MovieItem-listmv-time MovieItem-listmv-info">
-                                    <span>Thời lượng: </span>
-                                    <span>110 phút</span>
-                                </div>
-                            </Grid>
+                                    <div className="MovieItem-listmv-time MovieItem-listmv-info">
+                                        <span>Thời lượng: </span>
+                                        <span>110 phút</span>
+                                    </div>
+                                </Grid>
+                            </Link>
+
                             <Grid item className="MovieItem-listmv" m={1}>
                                 <div className="MovieItem-listmv-image ">
                                     <img src={Movie_1}/>
@@ -356,7 +364,7 @@ function Home() {
                                     <span>Trạng Quỳnh</span>
                                 </div>
 
-                                <div className="MovieItem-listmv-rules MovieItem-listmv-info">
+                                <div className=" MovieItem-listmv-info">
                                     <span>Thể loại: </span>
                                     <span>Phiêu lưu, Trinh thám</span>
                                 </div>

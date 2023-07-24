@@ -11,11 +11,33 @@ export const HeaderMV = styled('div')`
 
   .header-right {
     display: flex;
-    .login {
+    
+    .btn-auth {
       border-radius: 30px !important;
       background-color: #e3ebfd;
       margin: 0 10px;
       padding: 0 20px;
+
+      .logout {
+        display: none;
+        position: absolute;
+        border: 0;
+        bottom: -60%;
+        left: -5%;
+        padding: 10px 0;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      :hover .logout {
+        display: block;
+      }
+    }
+    .user {
+      list-style: none;
+      position: relative;
+      margin: auto;
+      padding: 15px;
     }
   }
 `
@@ -31,9 +53,16 @@ export const MenuListItem = styled('li')`
     cursor: pointer;
     margin: auto;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 20px;
+    color: #4F4F4F;
+  }
+  a:hover {
+    color: #4475f2;
+  }
+
+  .active {
     color: #4475f2;
   }
 `

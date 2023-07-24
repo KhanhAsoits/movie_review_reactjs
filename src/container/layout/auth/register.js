@@ -1,20 +1,64 @@
+import React, { useState, useLayoutEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import {
   Button,
+  CircularProgress,
   FormControl,
-  FormHelperText,
   FormLabel,
-  Input,
-  InputLabel,
   Link,
 } from '@mui/material'
 
 import { LoginLayout } from './style'
 import LoginImage from '../../../assets/images/Rectangle121.png'
+import { registerThunk } from '../../../app/slices/AuthSlice'
 
-function Register() {
+function Register({ isOpen, onClose }) {
+  const { isRegistering, setAlert } = useSelector(
+    (state) => state.authentication._draft,
+  )
+  const [email, setEmail] = useState('')
+  const [userName, setUserName] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const dispatch = useDispatch()
+  const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      alert('Mật khẩu không trùng khớp')
+    }
+
+    const registrationData = {
+      email: email,
+      password: password,
+      username: userName,
+    }
+    dispatch(registerThunk(registrationData))
+  }
+
+  const showToast = ({ type, msg }) => {
+    switch (type) {
+      case 'success':
+        toast.success(msg)
+        break
+      case 'error':
+        toast.error(msg)
+        break
+    }
+  }
+  useLayoutEffect(() => {
+    if (alert != null) {
+      showToast(alert)
+    }
+  }, [alert])
+  if (!isOpen) return null
   return (
     <LoginLayout>
       <div className="layoutItem layoutRegister">
+        <button onClick={onClose} className="layoutItem-goBack">
+          X
+        </button>
         <div className="layoutItem-left">
           <img
             src={LoginImage}
@@ -41,19 +85,21 @@ function Register() {
                 className="login_input"
                 type="text"
                 required
+                onChange={(e) => setUserName(e.target.value)}
               ></input>
             </div>
 
             <div className="password layoutLogin-item layoutRegister-item">
               <FormLabel className="login_label">
-                Số điện thoại <span className="note">*</span>
+                Email <span className="note">*</span>
               </FormLabel>
               <input
-                name="phone"
-                id="phone"
+                name="email"
+                id="email"
                 className="login_input"
-                type="number"
+                type="email"
                 required
+                onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>
 
@@ -65,8 +111,9 @@ function Register() {
                 name="password"
                 id="password"
                 className="login_input"
-                type="text"
+                type="password"
                 required
+                onChange={(e) => setPassword(e.target.value)}
               ></input>
             </div>
             <div className="password layoutLogin-item layoutRegister-item">
@@ -77,8 +124,9 @@ function Register() {
                 name="passwordAgain"
                 id="passwordAgain"
                 className="login_input"
-                type="text"
+                type="password"
                 required
+                onChange={(e) => setConfirmPassword(e.target.value)}
               ></input>
             </div>
 
@@ -94,12 +142,22 @@ function Register() {
               </div>
             </div>
 
-            <Button variant="contained" className="btn-Submit" type="submit">
-              Đăng nhập
+            <Button
+              variant="contained"
+              className="btn-Submit"
+              type="submit"
+              onClick={handleRegister}
+            >
+              {isRegistering ? (
+                <CircularProgress size={24} color={'info'} />
+              ) : (
+                'Đăng Ký'
+              )}
             </Button>
           </FormControl>
         </div>
       </div>
+      <ToastContainer />
     </LoginLayout>
   )
 }
