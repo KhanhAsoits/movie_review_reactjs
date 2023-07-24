@@ -4,6 +4,7 @@ export const HomeStyle = styled('div')`
   height: auto;
   background-color: #1b2330;
   position: relative;
+  padding-bottom: 50px
 `
 
 export const HomeStyleItem = styled('div')`
@@ -17,7 +18,7 @@ export const HomeStyleItem = styled('div')`
 
 export const NavInfo = styled('div')`
   display: flex;
-  padding-top: 10%;
+  padding: 10% 0 5%;
   position: relative;
   z-index: 9;
   .navInfo-left {
@@ -48,6 +49,9 @@ export const NavInfo = styled('div')`
       border-right: 2px solid #fff;
       margin: 10px 0;
       padding: 0 7px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
       &:first-child {
         color: #fa0;
       }
@@ -69,7 +73,7 @@ export const NavInfo = styled('div')`
     }
 
     .buy-ticket {
-      margin: 20% 0 0;
+      margin: 10% 0 0;
 
       .btn-ticket {
         padding: 15px 50px;
@@ -105,6 +109,7 @@ export const NavInfo = styled('div')`
         height: 95px;
         border-radius: 50%;
         margin: 10px 0;
+
       }
 
       .home-mvInfor--actorName {
@@ -115,21 +120,26 @@ export const NavInfo = styled('div')`
 `
 
 export const MovieItem = styled('div')`
-  padding: 3%;
+  padding:  1% 3%;
   z-index: 9;
   position: relative;
-
+  .MovieItem-link {
+    text-decoration: none;
+    cursor: pointer;
+  }
   .MovieItem-listmv {
     padding-bottom: 20px;
     .MovieItem-listmv-title {
       color: #fff;
-      font-size: 24px;
+      font-size: 34px;
+      font-weight: 600;
     }
 
     .MovieItem-listmv-more {
       font-size: 16px;
       cursor: pointer;
       color: #fff;
+      text-decoration-color: white;
     }
 
     .MovieItem-listmv-image {
@@ -146,13 +156,13 @@ export const MovieItem = styled('div')`
       color: #fff;
       line-height: 20px;
       padding: 2px 0;
-      color: #ebece7;
+      color:#9f9f9f;
       font-weight: 400;
     }
 
     .MovieItem-listmv-name {
       font-size: 18px;
-      line-height: 22px;
+      line-height: 30px;
       color: #fff;
     }
   }

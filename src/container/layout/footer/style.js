@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 
 export const FooterStyle = styled('div')`
   background-color: #fff;
-    padding: 15px;
+  padding: 15px;
   .btn-footer {
     border: 0;
     background-color: #e3ebfd;
@@ -72,6 +72,8 @@ export const FooterStyle = styled('div')`
     .footer-right--title {
       font-size: 20px;
       font-weight: 600;
+      color: #4F4F4F;
+      padding: 5px 0;
     }
 
     .footer-right--description {
@@ -81,6 +83,11 @@ export const FooterStyle = styled('div')`
       padding: 5px 0;
       text-align: justify;
     }
+  }
+
+  .footer-link {
+    font-size: 14px;
+    text-decoration: none;
   }
 `
 

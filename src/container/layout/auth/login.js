@@ -1,20 +1,57 @@
+import React, { useLayoutEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { loginThunk } from '../../../app/slices/AuthSlice'
 import {
   Button,
+  CircularProgress,
   FormControl,
-  FormHelperText,
   FormLabel,
-  Input,
-  InputLabel,
   Link,
 } from '@mui/material'
-
 import { LoginLayout } from './style'
 import LoginImage from '../../../assets/images/Rectangle121.png'
 
-function Login() {
+function Login({ isOpen, onClose }) {
+  const { isLogging, alert } = useSelector(
+    (state) => state.authentication._draft,
+  )
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
+
+  const handleLogin = () => {
+    const loginData = {
+      email: email,
+      password: password,
+    }
+    dispatch(loginThunk(loginData))
+  }
+
+  const showToast = ({ type, msg }) => {
+    switch (type) {
+      case 'success':
+        toast.success(msg)
+        break
+      case 'error':
+        toast.error(msg)
+        break
+    }
+  }
+  useLayoutEffect(() => {
+    if (alert != null) {
+      showToast(alert)
+    }
+  }, [alert])
+
+  if (!isOpen) return null
   return (
     <LoginLayout>
       <div className="layoutItem">
+        <button onClick={onClose} className="layoutItem-goBack">
+          X
+        </button>
         <div className="layoutItem-left">
           <img
             src={LoginImage}
@@ -26,24 +63,20 @@ function Login() {
 
         <div className="layoutItem-right">
           <FormControl width="100%">
-            {/* <InputLabel >Email address</InputLabel>
-            <Input  />
-            <FormHelperText id="my-helper-text">
-              We'll never share your email.
-            </FormHelperText> */}
             <div className="layoutItem-title">Đăng nhập</div>
             <div className="layoutItem-description">
               Đăng nhập để trải nghiệm dịch vụ đặt vé xem phim ở bất kì đâu
             </div>
             <div className="username layoutLogin-item">
               <FormLabel className="login_label">
-                Tên đăng nhập <span className="note">*</span>
+                Email <span className="note">*</span>
               </FormLabel>
               <input
-                name="username"
-                id="username"
+                name="email"
+                id="email"
                 className="login_input"
-                type="text"
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
                 required
               ></input>
             </div>
@@ -56,7 +89,8 @@ function Login() {
                 name="password"
                 id="password"
                 className="login_input"
-                type="text"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
                 required
               ></input>
             </div>
@@ -70,12 +104,22 @@ function Login() {
               <Link className="forgot-password">Quên mật khẩu?</Link>
             </div>
 
-            <Button variant="contained" className="btn-Submit" type="submit">
-              Đăng nhập
+            <Button
+              variant="contained"
+              className="btn-Submit"
+              type="submit"
+              onClick={handleLogin}
+            >
+              {isLogging ? (
+                <CircularProgress color="info" size={24} />
+              ) : (
+                'Đăng nhập'
+              )}
             </Button>
           </FormControl>
         </div>
       </div>
+      <ToastContainer />
     </LoginLayout>
   )
 }
