@@ -1,14 +1,15 @@
 import { styled } from '@mui/material/styles'
-import backgroundHome from '../../assets/images/trangchu.png'
 export const HomeStyle = styled('div')`
   height: auto;
   background-color: #1b2330;
   position: relative;
-  padding-bottom: 50px
+  padding-bottom: 50px;
+  background: radial-gradient(42% 28% at 50.00% 30%, rgba(27, 35, 48, 0.00) 0%, #1B2330 95%);
+  
 `
 
 export const HomeStyleItem = styled('div')`
-  .trangchu {
+.trangchu {
     position: absolute;
     opacity: 0.2;
     width: 100%;
@@ -18,7 +19,7 @@ export const HomeStyleItem = styled('div')`
 
 export const NavInfo = styled('div')`
   display: flex;
-  padding: 10% 0 5%;
+  padding: 10% 0 2%;
   position: relative;
   z-index: 9;
   .navInfo-left {

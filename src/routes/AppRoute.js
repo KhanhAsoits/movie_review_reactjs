@@ -1,8 +1,10 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from '../pages/trang-chu'
 import ShowTimes from '../pages/showtimes'
 import Login from '../container/layout/auth/login'
 import Register from '../container/layout/auth/register'
+import DetailFilm from '../pages/detailFilm'
+import TicketMV from '../pages/ticket'
+import Home from '../pages/trang-chu/home'
 
 export const AppRoute = (props) => {
   const route = createBrowserRouter([
@@ -13,6 +15,14 @@ export const AppRoute = (props) => {
     {
       path: '/showtimes',
       element: <ShowTimes />,
+    },
+    {
+      path: '/detail-film',
+      element: <DetailFilm />,
+    },
+    {
+      path: '/ticket-film',
+      element: <TicketMV />,
     },
   ])
   return <RouterProvider router={route} />

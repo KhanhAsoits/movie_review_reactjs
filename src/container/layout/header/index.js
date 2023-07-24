@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid'
 import { Button, Link } from '@mui/material'
 import Logo from '../../../assets/images/Logo.png'
 import IconSearch from '../../../assets/images/Iconsearch.png'
+import IconUser from '../../../assets/images/icons-user.png'
 import { useSelector } from 'react-redux'
 import Login from '../auth/login'
 import Register from '../auth/register'
@@ -78,9 +79,10 @@ function MVHeader() {
           </InputSearch>
 
           {isLoggedIn ? (
-            <li className=" btn-auth user">
+            <li className=" user">
+              <img src={IconUser} width={25} height={25} />
               {user.username}
-              <button className='logout btn-auth'>Đăng Xuất</button>
+              <button className='logout'>Đăng Xuất</button>
             </li>
             
           ) : (

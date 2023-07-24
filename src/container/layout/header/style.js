@@ -15,29 +15,30 @@ export const HeaderMV = styled('div')`
     .btn-auth {
       border-radius: 30px !important;
       background-color: #e3ebfd;
-      margin: 0 10px;
+      margin-left: 10px;
       padding: 0 20px;
 
-      .logout {
-        display: none;
-        position: absolute;
-        border: 0;
-        bottom: -60%;
-        left: -5%;
-        padding: 10px 0;
-        width: 100%;
-        cursor: pointer;
-      }
-
-      :hover .logout {
-        display: block;
-      }
+      
     }
     .user {
       list-style: none;
       position: relative;
       margin: auto;
       padding: 15px;
+      .logout {
+        display: none;
+        position: absolute;
+        border: 0;
+        bottom: -50%;
+        left: 5%;
+        padding: 10px 0;
+        width: 90%;
+        cursor: pointer;
+      }
+
+      :hover .logout {
+        display: block;
+      }
     }
   }
 `
