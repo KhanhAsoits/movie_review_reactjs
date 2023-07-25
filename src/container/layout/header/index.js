@@ -51,12 +51,12 @@ function MVHeader() {
                             </Link>
                         </MenuListItem>
                         <MenuListItem>
-                            <Link>
+                            <Link href={'/showtimes'}>
                                 <span>Lịch chiếu</span>
                             </Link>
                         </MenuListItem>
                         <MenuListItem>
-                            <Link>
+                            <Link href={'/list-movie'}>
                                 <span>Danh sách phim</span>
                             </Link>
                         </MenuListItem>
@@ -81,7 +81,6 @@ function MVHeader() {
                             {user.username}
                             <button className='logout'>Đăng Xuất</button>
                         </li>
-
                     ) : (
                         <>
                             <Button className="login btn-auth" onClick={handleLoginClick}>
@@ -91,16 +90,6 @@ function MVHeader() {
                                 Đăng Kí
                             </Button>
                         </>
-                    )}
-                    ) : (
-                    <>
-                        <Button className="login btn-auth" onClick={handleLoginClick}>
-                            Đăng nhập
-                        </Button>
-                        <Button className="register btn-auth" onClick={handleRegisterClick}>
-                            Đăng Kí
-                        </Button>
-                    </>
                     )}
                 </Grid>
             </Grid>

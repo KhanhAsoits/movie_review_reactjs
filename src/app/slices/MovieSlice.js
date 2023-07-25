@@ -1,12 +1,20 @@
 import {createThunkSlice} from "../../utils/createThunkSlice";
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {getAllMovies, getBestMovies, getRecentlyMovie, getSpecialMovies} from "../../services/MovieService";
+import {
+    getAllMovies,
+    getBestMovies,
+    getRecentlyMovie,
+    getSpecialMovies,
+    getMovieById
+} from "../../services/MovieService";
 
 const initState = {
-    recentlyMovie: [], specialMovie: [], bestMovie: [], showByTimeMovie: [], _draft: {
-        isFetchingBestMovie: false, isFetchingRecentlyMovie: false, isFetchingSpecialMovie: false, alert: null
+    recentlyMovie: [], specialMovie: [], bestMovie: [], showByTimeMovie: [], movieDetail: {}, allMovies: [], _draft: {
+        isFetchingBestMovie: false, isFetchingRecentlyMovie: false, isFetchingSpecialMovie: false, alert: null,
+        isFetchingMovieDetail: false, isFetchingAllMovie: false
     }
 }
+
 const movieSlice = createThunkSlice('movieSlice', initState, {}, builder => {
     builder.addCase(getBestMovie.pending, (state) => {
         state._draft.isFetchingBestMovie = true;
@@ -33,9 +41,29 @@ const movieSlice = createThunkSlice('movieSlice', initState, {}, builder => {
     }).addCase(getSpecialMovie.rejected, (state) => {
         state._draft.isFetchingSpecialMovie = false;
     })
+    builder.addCase(getMovieDetail.pending, (state) => {
+        state._draft.isFetchingMovieDetail = true
+    }).addCase(getMovieDetail.fulfilled, (state, {payload}) => {
+        state._draft.isFetchingMovieDetail = false
+        state.movieDetail = payload;
+    }).addCase(getMovieDetail.rejected, (state) => {
+        state._draft.isFetchingRecentlyMovie = false;
+        state._draft.alert = {type: 'error', msg: 'Lấy dữ liệu phim thất bại'}
+    })
+    builder.addCase(getAllMovie.pending, (state) => {
+        state._draft.isFetchingAllMovie = true
+    }).addCase(getAllMovie.fulfilled, (state, {payload}) => {
+        state._draft.isFetchingAllMovie = false;
+        state.allMovies = payload;
+    }).addCase(getAllMovie.rejected, (state) => {
+        state._draft.isFetchingAllMovie = false;
+    })
 })
 export const getAllMovie = createAsyncThunk("movies/getAll", async () => {
     return await getAllMovies()
+})
+export const getMovieDetail = createAsyncThunk("movies/detail", async (id) => {
+    return await getMovieById(id)
 })
 export const getBestMovie = createAsyncThunk("movies/topMovie", async () => {
     return await getBestMovies();
