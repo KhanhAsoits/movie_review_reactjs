@@ -1,11 +1,9 @@
-import {useState} from 'react'
 import {HeaderMV, InputSearch, MenuList, MenuListItem} from './style'
-import Box from '@mui/material/Box'
-import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 import {Button, Link} from '@mui/material'
 import Logo from '../../../assets/images/Logo.png'
 import IconSearch from '../../../assets/images/Iconsearch.png'
+import IconUser from '../../../assets/images/icons-user.png'
 import {useDispatch, useSelector} from 'react-redux'
 import Login from '../auth/login'
 import Register from '../auth/register'
@@ -78,9 +76,10 @@ function MVHeader() {
                     </InputSearch>
 
                     {isLoggedIn ? (
-                        <li className=" btn-auth user">
+                        <li className=" user">
+                            <img src={IconUser} width={25} height={25}/>
                             {user.username}
-                            <button className='logout btn-auth'>Đăng Xuất</button>
+                            <button className='logout'>Đăng Xuất</button>
                         </li>
 
                     ) : (
@@ -93,8 +92,16 @@ function MVHeader() {
                             </Button>
                         </>
                     )}
-
-
+                    ) : (
+                    <>
+                        <Button className="login btn-auth" onClick={handleLoginClick}>
+                            Đăng nhập
+                        </Button>
+                        <Button className="register btn-auth" onClick={handleRegisterClick}>
+                            Đăng Kí
+                        </Button>
+                    </>
+                    )}
                 </Grid>
             </Grid>
             <Login isOpen={isOpenLoginModal} onClose={closeModalLogin}/>

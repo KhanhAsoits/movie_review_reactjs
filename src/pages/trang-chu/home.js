@@ -5,7 +5,6 @@ import Poster_1 from '../../assets/images/Rectangle122.png'
 import Poster_2 from '../../assets/images/Rectangle123.png'
 import Poster_3 from '../../assets/images/Rectangle124.png'
 import Actor_1 from '../../assets/images/Rectangle125.png'
-import Movie_1 from '../../assets/images/Rectangle102.png'
 import {Box, CircularProgress, Grid, Link} from '@mui/material'
 import {useLayoutEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
