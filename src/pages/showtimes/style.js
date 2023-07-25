@@ -24,14 +24,12 @@ export const ShowTimeStyle = styled('div')`
   }
 
   .btn-showtimeMV {
-    margin: 10px;
+    width: calc(100% / 6);
+    margin: 2px 0;
     padding: 10px 20px;
     font-size: 14px;
-    color: #4F4F4F;
+    color: #4f4f4f;
     cursor: pointer;
-    :first-child {
-      margin-left: 0;
-    }
   }
 `
 
@@ -48,11 +46,9 @@ export const ShowTimeStyleItem = styled('div')`
     :first-child {
       margin-left: 0;
     }
-    div{
+    div {
       background-color: #fff;
       padding: 7px 25px;
     }
-    
-    
   }
 `

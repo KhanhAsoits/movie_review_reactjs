@@ -60,7 +60,7 @@ export const ListMovie = () => {
                                 <>
                                     {allMovies.map((movie, index) => {
                                         return (
-                                            <Link to={'/detail-film/' + movie?.id}>
+                                            <Link to={'/detail-film/' + movie?.id} style={{textDecoration: 'none'}}>
                                                 <Grid container my={3}>
                                                     <Grid className="showTimeMV-img">
                                                         <img style={{
