@@ -4,10 +4,10 @@ import {getAllMovies, getBestMovies, getRecentlyMovie, getSpecialMovies} from ".
 
 const initState = {
     recentlyMovie: [], specialMovie: [], bestMovie: [], showByTimeMovie: [], _draft: {
-        isFetchingBestMovie: false, isFetchingRecentlyMovie: false, isFetchingSpecialMovie: false,
+        isFetchingBestMovie: false, isFetchingRecentlyMovie: false, isFetchingSpecialMovie: false, alert: null
     }
 }
-const movieSlice = createThunkSlice('movieSlice', initState, builder => {
+const movieSlice = createThunkSlice('movieSlice', initState, {}, builder => {
     builder.addCase(getBestMovie.pending, (state) => {
         state._draft.isFetchingBestMovie = true;
     }).addCase(getBestMovie.fulfilled, (state, {payload}) => {
@@ -35,7 +35,7 @@ const movieSlice = createThunkSlice('movieSlice', initState, builder => {
     })
 })
 export const getAllMovie = createAsyncThunk("movies/getAll", async () => {
-    return await getAllMovies();
+    return await getAllMovies()
 })
 export const getBestMovie = createAsyncThunk("movies/topMovie", async () => {
     return await getBestMovies();

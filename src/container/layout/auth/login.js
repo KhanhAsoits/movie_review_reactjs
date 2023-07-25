@@ -100,7 +100,6 @@ function Login({ isOpen, onClose }) {
                 <input type="checkbox"></input>
                 <FormLabel>Nhớ mật khẩu</FormLabel>
               </div>
-
               <Link className="forgot-password">Quên mật khẩu?</Link>
             </div>
 
