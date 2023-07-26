@@ -15,27 +15,9 @@ import 'react-toastify/dist/ReactToastify.css'
 function ChooseLocation() {
     const {state} = useLocation();
     const {movie, time} = state;
-    const {alert} = useSelector(state => state.ticket)
 
     const dispatch = useDispatch();
 
-    const showToast = (type, msg) => {
-        switch (type) {
-            case 'error':
-                toast.error(msg);
-                break;
-            case 'success':
-                toast.success(msg);
-                break;
-        }
-    }
-
-    useLayoutEffect(() => {
-        if (alert != null) {
-            showToast(alert.type, alert.msg);
-            dispatch(setAlertTicket(null))
-        }
-    }, [alert])
     return (
         <LayoutMV>
             <ChooseLocationStyle>
