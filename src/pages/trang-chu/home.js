@@ -1,10 +1,6 @@
 import LayoutMV from '../../render/App'
 import {HomeStyle, HomeStyleItem, MovieItem, NavInfo} from './style'
 import backgroundHome from '../../assets/images/trangchu.png'
-import Poster_1 from '../../assets/images/Rectangle122.png'
-import Poster_2 from '../../assets/images/Rectangle123.png'
-import Poster_3 from '../../assets/images/Rectangle124.png'
-import Actor_1 from '../../assets/images/Rectangle125.png'
 import {Box, CircularProgress, Grid, Link} from '@mui/material'
 import {useLayoutEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";

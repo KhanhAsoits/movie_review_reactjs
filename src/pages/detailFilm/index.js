@@ -4,17 +4,20 @@ import LayoutMV from '../../render/App'
 import Movie_1 from '../../assets/images/Rectangle102.png'
 import {useDispatch, useSelector} from "react-redux";
 import {useLayoutEffect} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {getMovieDetail} from "../../app/slices/MovieSlice";
 
 function DetailFilm() {
     const {movieId} = useParams()
+    const navigation = useNavigate();
     const dispatch = useDispatch()
     const {isFetchingMovieDetail} = useSelector(state => state.movie._draft)
     const {movieDetail} = useSelector(state => state.movie)
     useLayoutEffect(() => {
         dispatch(getMovieDetail(movieId))
     }, [])
+    useLayoutEffect(() => {
+    }, [movieDetail])
     return (
         <LayoutMV>
             <DetailFilmStyle>
@@ -132,7 +135,10 @@ function DetailFilm() {
                                         {movieDetail?.category === 'special' &&
                                             (
                                                 <Grid container className="buy-ticket">
-                                                    <button className="btn-ticket">Đặt vé ngay</button>
+                                                    <button onClick={() => {
+                                                        navigation('/ticket/' + movieId)
+                                                    }} className="btn-ticket">Đặt vé ngay
+                                                    </button>
                                                 </Grid>
                                             )
                                         }

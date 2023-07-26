@@ -15,11 +15,14 @@ export const TicketBody = styled('div')`
   background-color: #1b2330;
   position: relative;
   .ticket-dateTime {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 1.5rem 0;
     border-bottom: 1px solid #aaa;
     .ticket-date {
+      margin: 4px 3px;
       width: calc((100% - 4.4%) / 12);
-      margin: 0rem 0.2%;
       :first-child {
         margin-left: 0;
       }

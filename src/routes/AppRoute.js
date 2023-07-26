@@ -32,6 +32,14 @@ export const AppRoute = (props) => {
             path: '/choose-location',
             element: <ChooseLocation />,
         },
+        {
+            path:'/ticket/:movieId',
+            element:<TicketMV/>
+        },
+        {
+            path:'/seats',
+            element:<ChooseLocation/>
+        }
     ])
     return <RouterProvider router={route}/>
 }

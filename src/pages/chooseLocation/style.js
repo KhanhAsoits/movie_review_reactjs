@@ -27,7 +27,7 @@ export const ChooseLocationScreen = styled('div')`
   .position {
     padding-top: 15px;
   }
-  
+
 
   .btn-maintenance {
     overflow: hidden;
@@ -39,26 +39,28 @@ export const ChooseLocationScreen = styled('div')`
       top: 50%;
       left: 50%;
       width: 100%;
-      height: 1px;
+      height: 2px;
       background-color: #333333;
       transform-origin: center;
       transform: translate(-50%, -50%) rotate(45deg);
     }
+
     :after {
       content: '';
       position: absolute;
       top: 50%;
       left: 50%;
       width: 100%;
-      height: 1px;
+      height: 2px;
       background-color: #333333;
       transform-origin: center;
       transform: translate(-50%, -50%) rotate(-45deg);
     }
   }
+
   .position-chair {
     .btn-chair {
-      width: calc((100% - 5%) / 12);
+      width: calc((100% - 5%) / 8);
       margin: 0.2%;
       font-size: 1.2rem;
       light-height: 1.6rem;
@@ -84,18 +86,19 @@ export const ChooseLocationScreen = styled('div')`
     }
 
     .btn-selected {
+      border-color: #f2f2f2;
+      background-color: #f2f2f2;
+      cursor: default;
+
+      :hover {
         border-color: #f2f2f2;
         background-color: #f2f2f2;
-        cursor: default;
-        :hover {
-            border-color: #f2f2f2;
-            background-color: #f2f2f2;
-          }
-    
-          :focus {
-            border-color: #f2f2f2;
-            background-color: #f2f2f2;
-          }
+      }
+
+      :focus {
+        border-color: #f2f2f2;
+        background-color: #f2f2f2;
+      }
     }
 
     .btn-sweetbox {
@@ -116,6 +119,7 @@ export const ChooseLocationScreen = styled('div')`
       }
     }
   }
+
   .position-note {
     width: 55%;
     margin: 25px auto;
@@ -147,6 +151,7 @@ export const ChooseLocationScreen = styled('div')`
     border: 1px solid #6cbf28;
     background-color: #fff;
   }
+
   .btn-vip {
     border: 1px solid #fa0;
     background-color: #fff;

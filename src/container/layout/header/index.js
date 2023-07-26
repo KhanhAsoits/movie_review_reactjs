@@ -41,12 +41,12 @@ function MVHeader() {
                 <Grid item my="auto">
                     <MenuList container>
                         <MenuListItem>
-                            <Link>
+                            <Link href='/'>
                                 <img src={Logo}></img>
                             </Link>
                         </MenuListItem>
                         <MenuListItem>
-                            <Link className="active">
+                            <Link className="active" href='/'>
                                 <span>Trang chủ</span>
                             </Link>
                         </MenuListItem>

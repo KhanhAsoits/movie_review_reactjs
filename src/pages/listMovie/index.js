@@ -1,9 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useLayoutEffect} from "react";
+import {useLayoutEffect, useState} from "react";
 import LayoutMV from "../../render/App";
 import {ShowTimesMV, ShowTimesStyle, ShowTimeStyle, ShowTimeStyleItem} from "../showtimes/style";
 import {Box, CircularProgress, Grid, MenuItem, Select, Typography} from "@mui/material";
-import {getAllMovie} from "../../app/slices/MovieSlice";
+import {filterMovie, getAllMovie} from "../../app/slices/MovieSlice";
 import {Link} from "react-router-dom";
 
 export const ListMovie = () => {
@@ -11,10 +11,32 @@ export const ListMovie = () => {
     const dispatch = useDispatch()
     const {allMovies} = useSelector(state => state.movie)
     const {isFetchingAllMovie} = useSelector(state => state.movie._draft)
+    const [selectFilter,setSelectFilter] = useState(0);
     useLayoutEffect(() => {
         dispatch(getAllMovie())
     }, [])
 
+
+    const handleChangeFilter = ({target})=>{
+        const value = target.value;
+        let type_ = '';
+        switch(value){
+            case 0:
+                type_ = 'allMovies'
+                break;
+            case 1:
+                type_ = 'new'
+            break;
+            case 2:
+                type_='recently'
+            break;
+            case 3:
+                type_ = 'best'
+                break;
+
+        }
+        dispatch(filterMovie({type_}))
+    }
     return (
         <LayoutMV>
             <ShowTimeStyle>
@@ -29,13 +51,14 @@ export const ListMovie = () => {
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={1}
+                                        value={selectFilter}
                                         label="Age"
                                         className="select"
+                                        onChange={handleChangeFilter}
                                     >
-                                        <MenuItem value={1}>Tất cả</MenuItem>
+                                        <MenuItem value={0}>Tất cả</MenuItem>
                                         <MenuItem value={1}>Phim Mới</MenuItem>
-                                        <MenuItem value={0}>Phim Sắp Chiếu</MenuItem>
+                                        <MenuItem value={2}>Phim Sắp Chiếu</MenuItem>
                                         <MenuItem value={3}>Phim Thịnh Hành</MenuItem>
                                     </Select>
                                 </Grid>
