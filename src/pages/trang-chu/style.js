@@ -126,6 +126,7 @@ export const MovieItem = styled('div')`
   position: relative;
   .MovieItem-link {
     text-decoration: none;
+    width: calc(100%/6);
     cursor: pointer;
   }
   .MovieItem-listmv {
@@ -144,7 +145,8 @@ export const MovieItem = styled('div')`
     }
 
     .MovieItem-listmv-image {
-      width: 210px;
+
+      width: 100%;
       height: 271px;
       img {
         width: 100%;
