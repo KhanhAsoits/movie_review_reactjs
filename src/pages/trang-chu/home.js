@@ -1,10 +1,11 @@
 import LayoutMV from '../../render/App'
 import {HomeStyle, HomeStyleItem, MovieItem, NavInfo} from './style'
 import backgroundHome from '../../assets/images/trangchu.png'
-import {Box, CircularProgress, Grid, Link} from '@mui/material'
+import {Box, CircularProgress, Grid} from '@mui/material'
 import {useLayoutEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getShowingMovie, getBestMovie, getSpecialMovie} from "../../app/slices/MovieSlice";
+import { Link } from 'react-router-dom';
 
 function Home() {
     const dispatch = useDispatch()

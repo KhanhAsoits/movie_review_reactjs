@@ -51,4 +51,8 @@ export const ShowTimeStyleItem = styled('div')`
       padding: 7px 25px;
     }
   }
+
+  .pagination {
+    button {color: #fff;}
+  }
 `
