@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import LayoutMV from '../../render/App'
 import {
   ShowTimesMV,
@@ -16,8 +16,8 @@ import {
   Typography,
 } from '@mui/material'
 
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import Pagination from '@mui/material/Pagination'
+import Stack from '@mui/material/Stack'
 import { filterMovie, getAllMovie } from '../../app/slices/MovieSlice'
 import { Link } from 'react-router-dom'
 
@@ -26,9 +26,31 @@ export const ListMovie = () => {
   const { allMovies } = useSelector((state) => state.movie)
   const { isFetchingAllMovie } = useSelector((state) => state.movie._draft)
   const [selectFilter, setSelectFilter] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [currentData, setCurrentData] = useState(allMovies)
   useLayoutEffect(() => {
     dispatch(getAllMovie())
   }, [])
+  useEffect(() => {
+    setCurrentData(allMovies.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage,
+    ))
+  }, [])
+
+  const itemsPerPage = 10
+
+  const totalPages = Math.ceil(allMovies.length / itemsPerPage)
+
+  const handlePageChange = (event, pageNumber) => {
+    setCurrentPage(pageNumber)
+    console.log(pageNumber)
+    const newCurrentData = allMovies.slice(
+      (pageNumber - 1) * itemsPerPage,
+      pageNumber * itemsPerPage
+    );
+    setCurrentData((prev) => (prev= newCurrentData));
+  }
 
   const handleChangeFilter = ({ target }) => {
     const value = target.value
@@ -97,7 +119,7 @@ export const ListMovie = () => {
                 </Box>
               ) : (
                 <>
-                  {allMovies.map((movie, index) => {
+                  {currentData.map((movie, index) => {
                     return (
                       <Link
                         to={'/detail-film/' + movie?.id}
@@ -156,11 +178,22 @@ export const ListMovie = () => {
                   })}
                 </>
               )}
-             
             </ShowTimesMV>
-            <Stack spacing={2} justifyContent='center' color='#fff' className='pagination'>
-        <Pagination count={10} color="primary" className='pagination-item' style={{margin: 'auto'}} />
-              </Stack>
+            <Stack
+              spacing={2}
+              justifyContent="center"
+              color="#fff"
+              className="pagination"
+            >
+              <Pagination
+                count={totalPages}
+                color="primary"
+                className="pagination-item"
+                style={{ margin: 'auto' }}
+                page={currentPage} 
+                onChange={handlePageChange}
+              />
+            </Stack>
           </ShowTimesStyle>
         </ShowTimeStyleItem>
       </ShowTimeStyle>
